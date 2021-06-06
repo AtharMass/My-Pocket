@@ -27,9 +27,11 @@
 }
 
 .expense{
-    border:1px solid black;
-    border-radius: 5px;
-    margin: 10px;
+    align-items: center;
+    margin: 5px;
+    background: transparent;
+    border-radius: 2px;
+    box-shadow: #040404 2px 2px 4px;
 }
 
 .incomes{
@@ -38,13 +40,15 @@
 }
 
 .income{
-    border:1px solid black;
-    border-radius: 5px;
-    margin: 10px;
+    align-items: center;
+    margin: 5px;
+    background: transparent;
+    border-radius: 1px;
+    box-shadow: #040404 2px 2px 4px;
 }
-
 
 .nav-toggler{
     color: white !important;
     font-size: 20px
 }
+
