@@ -19,9 +19,11 @@ router.post('/transaction', function (request, response) {
 })
 
 
-router.get('/transactions/expense/:isExpense', function (req, res) { // work
+router.get('/transactions/expense/:isExpense', function (req, res) { 
     let { isExpense } = req.params
-    Transaction.find({ isExpense })
+    Transaction
+        .find({ isExpense })
+        .sort({_id: -1})
         .exec(function (err, transactions) {
             res.send(transactions)
         })
