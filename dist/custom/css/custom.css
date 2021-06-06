@@ -32,6 +32,18 @@
     margin: 10px;
 }
 
+.incomes{
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.income{
+    border:1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+
 .nav-toggler{
     color: white !important;
     font-size: 20px
