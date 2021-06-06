@@ -6,7 +6,7 @@ const api = require('./server/routes/api')
 var app = express()
 const PORT = 3555
 
-mongoose.connect("mongodb://localhost/transactions",{ useNewUrlParser: true })
+mongoose.connect("mongodb://localhost/transactions",{ useNewUrlParser: true , useUnifiedTopology: true})
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
