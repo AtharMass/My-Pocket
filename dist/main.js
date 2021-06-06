@@ -1,6 +1,5 @@
 const render = new Renderer()
 const transactionManager = new TransactionManager()
-var moment = require('moment');
 
 const setSelectedItem = function(element){
     $("li").removeClass('selected')
