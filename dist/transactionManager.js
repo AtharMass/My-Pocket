@@ -15,9 +15,16 @@ class TransactionManager {
     }
 
     saveTransaction = async function(data){
-        console.log(data);
         await $.post('/transaction',data, function (res) {
             console.log(res);
+            if(res === "Added"){
+                Swal.fire({
+                    icon: 'success',
+                    title: `Your ${data.title} data has been saved`,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
         })
     }
 

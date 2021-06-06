@@ -23,16 +23,14 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
 })
 
 
-$(document).on('click','#addTransction',function(){
+$(document).on('click','#addTransction',async function(){
     const title = $(this).closest('form').find('#title')
     const category = $(this).closest('form').find('#category')
     const date = $(this).closest('form').find('#date')
     const total = $(this).closest('form').find('#total')
     const isConstant =  $(this).closest('form').find('#isConstant')
     const isExpense =  $(this).closest('form').find('#isExpense')
-    console.log("isConstant: ",isExpense);
-    console.log("isConstant: ",isConstant);
-
+   
     let obj = {
         category: category.val(),
         date: date.val(),
@@ -41,7 +39,9 @@ $(document).on('click','#addTransction',function(){
         isExpense: isExpense.val(),
         isConstant: isConstant.val()
     }
-    transactionManager.saveTransaction(obj)
+    await transactionManager.saveTransaction(obj)
+    render.setTemplate("add")
+    render.renderData(transactionManager.transactionsData)
 }) 
 
 $(document).on('click','#updataTransction',function(){
@@ -52,8 +52,7 @@ $(document).on('click','#updataTransction',function(){
     const total = $(this).closest('form').find('#total')
     const isConstant =  $(this).closest('form').find('#isConstant')
     const isExpense =  $(this).closest('form').find('#isExpense')
-    console.log("isConstant: ",isExpense);
-    console.log("isConstant: ",isConstant);
+   
     let updateObj = {
         category: category.val(),
         date: date.val(),
