@@ -210,6 +210,7 @@
     <script id="expenses-template" type="text/x-handlebars-template">
         <div class="expenses"> 
             {{#each transactions}}
+<<<<<<< HEAD
             <div id="{{_id}}" class="expense">
                 <span class="round round-danger expense-icon">
                     <img src="./custom/images/logo-icon.png" style="width:40px" alt="Expense-Icon">
@@ -236,6 +237,15 @@
                 <div class="align-middle expense-date"> 
                     {{date}}
                 </div>
+=======
+            <div class="expense">
+                <div> {{title}}</div>
+                <div> {{category}} </div>
+                <div> {{total}} </div>
+                <div>{{date}}</div>
+                <div>{{isConstant}}</div>
+                <div>{{isExpense}}</div>
+>>>>>>> master
             </div>
             {{/each}}
                
