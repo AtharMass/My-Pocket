@@ -8,22 +8,32 @@ class TransactionManager {
         return new Promise(async (resolve, reject) => {
             try {
                 const data = await $.get(`/transactions/expense/${isExpense}`)
+                data.forEach((el) => {
+                    el.date =  moment(el.date).format('DD-MM-YYYY')
+                })
                 this.transactionsData = data
                 resolve(data)
             }catch(e) {
                 reject(e)
             }
         });
-        // return this.transactionsData
     }
 
     saveTransaction = async function(data){
         await $.post('/transaction',data, function (res) {
-            console.log(res);
-            if(res === "Added"){
+
+            if(res.code === 200){
                 Swal.fire({
                     icon: 'success',
-                    title: `Your ${data.title} data has been saved`,
+                    title: `Nice, ${res.message}`,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: `Oops..., Something went wrong!`,
+                    text: `${res.message}`,  
                     showConfirmButton: false,
                     timer: 2000
                 })
