@@ -21,7 +21,7 @@ router.post('/transaction', function (request, response) {
     if ( data.title !== '' && data.total !== '' && data.category !== '') {
         const savePromise = newTrans.save()
         savePromise.then( saved => {
-            console.log(saved)
+          
         }).catch(err => {
             console.log(err)
         })
