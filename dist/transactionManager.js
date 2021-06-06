@@ -9,7 +9,7 @@ class TransactionManager {
             try {
                 const data = await $.get(`/transactions/expense/${isExpense}`)
                 data.forEach((el) => {
-                    el.date =  moment(el.date).format('DD-MM-YYYY')
+                    el.date =  moment(el.date).format('YYYY-MM-DD')
                 })
                 this.transactionsData = data
                 resolve(data)
