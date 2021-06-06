@@ -2,8 +2,7 @@ const render = new Renderer()
 const transactionManager = new TransactionManager()
 
 let idTemplate = "expenses"
-let isExpense = "true"
-
+let isExpense = true
 const setSelectedItem = function(element){
     $("li").removeClass('selected')
     $("li").find("div").removeClass('active')
@@ -15,9 +14,9 @@ const setSelectedItem = function(element){
 
 const checkIfExpense = function (){
     if(idTemplate == "expenses"){
-        isExpense = "true"
+        isExpense = true
     }else{
-        isExpense = "false"
+        isExpense = false
     }
 }
 
@@ -51,23 +50,30 @@ $(document).on('click','#addTransction',async function(){
 }) 
 
 $(document).on('click','.updataTransction',function(){
-    const id = $(this).closest('.expense').attr('id')
-    const title = $(this).closest('form').find('#title')
-    const category = $(this).closest('form').find('#category')
-    const date = $(this).closest('form').find('#date')
-    const total = $(this).closest('form').find('#total')
-    const isConstant =  $(this).closest('form').find('#isConstant')
-    const isExpense =  $(this).closest('form').find('#isExpense')
-   
-    let updateObj = {
-        category: category.val(),
-        date: date.val(),
-        total: total.val(),
-        title: title.val(),
-        isExpense: isExpense.val(),
-        isConstant: isConstant.val()
-    }
-    transactionManager.updateTransaction(id, updateObj)
+    const idExpense = $(this).closest('.expense').attr("id")
+    const idIncome = $(this).closest('.income').attr("id")
+    let id = idExpense ?? idIncome
+    const type = isExpense ? "expense" : "income"
+
+    const title = $(this).closest(`.${type}`).find('h6').text().trim()
+    const category = $(this).closest(`.${type}`).find('.transaction-category').text().trim()
+    const total = $(this).closest(`.${type}`).find('.transaction-total').text().trim()
+    const date = $(this).closest(`.${type}`).find('.transaction-date').text().trim()
+    let isConstant = $(this).closest(`.${type}`).find('small').text().trim()
+    isConstant = (isConstant =="Constant")  ? true : false
+    
+    let obj = [{
+        category: category,
+        date: date,
+        total: total,
+        title: title,
+        isExpense: isExpense,
+        isConstant: isConstant
+    }]
+
+    render.setTemplate("edit")
+    render.renderData(obj)
+    // transactionManager.updateTransaction(id, updateObj)
 
 })
 
