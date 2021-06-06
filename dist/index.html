@@ -7,10 +7,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./custom/images/favicon.png">
     <title>My Pocket</title>
-
     <script src="./jquery/dist/jquery.js"></script>
     <script src="./selectize/dist/js/standalone/selectize.min.js"></script>
     <script src="./sweetalert2/dist/sweetalert2.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
     <!-- CSS -->
     <link href="./assets/css/style.min.css" rel="stylesheet">
     <link href="./custom/css/custom.css" rel="stylesheet">
@@ -278,8 +278,8 @@
                     {{date}}
                 </div>
                 <div class="transaction-action">
-                    <button class="btn btn-outline-warning updataTransction">Edit</button>
-                    <button class="btn btn-outline-danger deleteTransction">Delete</button>
+                    <button class="btn btn-outline-warning updataTransction m-2"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-outline-danger deleteTransction m-2"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
             {{/each}}

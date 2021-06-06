@@ -111,6 +111,4 @@ $(document).on('click','.deleteTransction',function(){
         
     })
 
-   
-
 })
