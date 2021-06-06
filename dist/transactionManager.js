@@ -31,4 +31,15 @@ class TransactionManager {
         });
     }
 
+    updateTransaction = async function (id,updateObj) { // good
+        return $.ajax({
+            url: `transaction/${id}`,
+            type: 'PUT',
+            data: updateObj,
+            success: function (transaction) {
+              console.log(transaction);
+            }
+        });
+    }
+
 }

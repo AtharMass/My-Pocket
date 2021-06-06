@@ -28,22 +28,45 @@ $(document).on('click','#addTransction',function(){
     const category = $(this).closest('form').find('#category')
     const date = $(this).closest('form').find('#date')
     const total = $(this).closest('form').find('#total')
-    let isExpenseForm = true
-    let isConstantForm = true
+    const isConstant =  $(this).closest('form').find('#isConstant')
+    const isExpense =  $(this).closest('form').find('#isExpense')
+    console.log("isConstant: ",isExpense);
+    console.log("isConstant: ",isConstant);
 
     let obj = {
         category: category.val(),
         date: date.val(),
         total: total.val(),
         title: title.val(),
-        isExpense: isExpenseForm,
-        isConstant: isConstantForm
+        isExpense: isExpense.val(),
+        isConstant: isConstant.val()
     }
     transactionManager.saveTransaction(obj)
 }) 
 
+$(document).on('click','#updataTransction',function(){
+    const id = $(this).closest('.expense').attr('id')
+    const title = $(this).closest('form').find('#title')
+    const category = $(this).closest('form').find('#category')
+    const date = $(this).closest('form').find('#date')
+    const total = $(this).closest('form').find('#total')
+    const isConstant =  $(this).closest('form').find('#isConstant')
+    const isExpense =  $(this).closest('form').find('#isExpense')
+    console.log("isConstant: ",isExpense);
+    console.log("isConstant: ",isConstant);
+    let updateObj = {
+        category: category.val(),
+        date: date.val(),
+        total: total.val(),
+        title: title.val(),
+        isExpense: isExpense.val(),
+        isConstant: isConstant.val()
+    }
+    mangerTransction.updateTransaction(id.val(), updateObj)
 
-$('.delete').on('click', function () {
-    let id = "60bbea18e76e708c8c0beee1"
-    mangerTransction.removeTransaction(id)
+})
+
+$(document).on('click','#deleteTransction',function(){
+    const id = $(this).closest('form').find('#title')
+    mangerTransction.removeTransaction(id.val())
 })
