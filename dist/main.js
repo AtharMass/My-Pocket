@@ -28,7 +28,6 @@ $(document).on('click','#addTransction',function(){
     const category = $(this).closest('form').find('#category')
     const date = $(this).closest('form').find('#date')
     const total = $(this).closest('form').find('#total')
-   
     let isExpenseForm = true
     let isConstantForm = true
 
@@ -42,3 +41,9 @@ $(document).on('click','#addTransction',function(){
     }
     transactionManager.saveTransaction(obj)
 }) 
+
+
+$('.delete').on('click', function () {
+    let id = "60bbea18e76e708c8c0beee1"
+    mangerTransction.removeTransaction(id)
+})
