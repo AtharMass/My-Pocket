@@ -27,11 +27,52 @@
 }
 
 .expense{
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-areas:
+    'i t t c c to to d d a a'
+    'i t t c c to to d d a a'
+    'i t t c c to to d d a a'
+    'i t t c c to to d d a a';
     align-items: center;
     margin: 5px;
+    padding: 5px;
+    font-size: 17px;
     background: transparent;
     border-radius: 2px;
     box-shadow: #040404 2px 2px 4px;
+}
+
+.transaction-icon{
+    display: grid;
+    grid-area: i;
+    margin: auto;
+}
+.transaction-title{
+    display: grid;
+    grid-area: t;
+    margin: auto;
+}
+.transaction-category{
+    display: grid;
+    grid-area: c;
+    margin: auto;
+}
+.transaction-total{
+    display: grid;
+    grid-area: to;
+    margin: auto;
+}
+.transaction-date{
+    display: grid;
+    grid-area: d;
+    margin: auto;
+}
+
+.transaction-action{
+    display: flex;
+    grid-area: a;
+    margin: auto;
 }
 
 .incomes{
@@ -39,9 +80,25 @@
     grid-template-columns: auto;
 }
 
+/* .btn-outline-danger:hover{
+    background-color: red;
+} */
+
+.deleteTransction{
+    border-radius: 50%;
+}
 .income{
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-areas:
+    'i t t c c to to d d a a'
+    'i t t c c to to d d a a'
+    'i t t c c to to d d a a'
+    'i t t c c to to d d a a';
     align-items: center;
     margin: 5px;
+    padding: 5px;
+    font-size: 17px;
     background: transparent;
     border-radius: 1px;
     box-shadow: #040404 2px 2px 4px;

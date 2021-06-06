@@ -5,7 +5,7 @@ var moment = require('moment');
 
 router.post('/transaction', function (request, response) { 
     let data = request.body
-    console.log("Date: ",moment(data.date).format('L'))
+    // console.log("Date: ",moment(data.date).format('L'))
     let newTrans = new Transaction({
         category: data.category,
         date:  data.date,
@@ -14,7 +14,12 @@ router.post('/transaction', function (request, response) {
         isExpense: data.isExpense,
         isConstant: data.isConstant
     })
-   newTrans.save()
+    const savePromise = newTrans.save()
+    savePromise.then( saved => {
+        console.log(saved)
+    }).catch(err => {
+        console.log(err)
+    })
    response.send(`Added`)
 })
 
@@ -26,6 +31,18 @@ router.get('/transactions/expense/:isExpense', function (req, res) {
         .sort({_id: -1})
         .exec(function (err, transactions) {
             res.send(transactions)
+        })
+})
+
+router.delete('/transaction/:id', function (req, res) { // work
+    let { id } = req.params
+    Transaction.deleteOne({ _id: id })
+        .exec((err, success) => {
+            if (success === null) {
+                res.send(`Not find`)
+            } else {
+                res.send(`Delete`)
+            }
         })
 })
 

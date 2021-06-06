@@ -1,8 +1,3 @@
-
-
-
-
-
 class TransactionManager {
 
     constructor() {
@@ -10,8 +5,16 @@ class TransactionManager {
     }
 
     getTransactionExpenseFromDB = async function (isExpense) {
-        const data =  await $.get(`/transactions/expense/${isExpense}`)
-        this.transactionsData = data
+        return new Promise(async (resolve, reject) => {
+            try {
+                const data = await $.get(`/transactions/expense/${isExpense}`)
+                this.transactionsData = data
+                resolve(data)
+            }catch(e) {
+                reject(e)
+            }
+        });
+        // return this.transactionsData
     }
 
     saveTransaction = async function(data){
@@ -28,23 +31,34 @@ class TransactionManager {
         })
     }
 
-    removeTransaction = async function (id) { 
-        return $.ajax({
-            url: `transaction/${id}`,
-            type: 'DELETE',
-            success: function (transaction) {
-                alert(transaction)
+    removeTransaction = async function (id,isExpense) { 
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+                const deleteActionResp = await $.ajax({
+                    url: `transaction/${id}`,
+                    type: 'DELETE'
+                });
+        
+                await this.getTransactionExpenseFromDB(isExpense)
+    
+                resolve(this.transactionsData)
+            } catch (e) {
+                reject(e)
             }
         });
     }
 
     updateTransaction = async function (id,updateObj) { // good
+
         return $.ajax({
             url: `transaction/${id}`,
             type: 'PUT',
             data: updateObj,
             success: function (transaction) {
-              console.log(transaction);
+               
+                console.log(transaction);
             }
         });
     }
