@@ -25,7 +25,13 @@ $(document).on('change','#isConstant',function(){
     console.log($(this).val());  
 })
 
-    
+$(document).on('change','#title',function(){
+    const title = $(this).find('#title').text
+    console.log(title)
+    const category = $(this).find('#category').text
+    console.log(category)  
+})
+  
 
 // $(document).ready(function () {
 
