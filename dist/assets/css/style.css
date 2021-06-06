@@ -1942,7 +1942,7 @@ pre {
     .table-responsive-md > .table-bordered {
       border: 0; } }
 
-@media (max-width: 991.98px) {
+@media (max-width: 1169px) {
   .table-responsive-lg {
     display: block;
     width: 100%;

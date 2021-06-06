@@ -7,10 +7,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./custom/images/favicon.png">
     <title>My Pocket</title>
-
     <script src="./jquery/dist/jquery.js"></script>
     <script src="./selectize/dist/js/standalone/selectize.min.js"></script>
     <script src="./sweetalert2/dist/sweetalert2.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" type="text/javascript"></script>
     <!-- CSS -->
     <link href="./assets/css/style.min.css" rel="stylesheet">
     <link href="./custom/css/custom.css" rel="stylesheet">
@@ -155,7 +155,7 @@
 
                     <!-- Category -->
                     <div class="form-group category-inoput">
-                        <label class="col-md-12">Ctegory</label>
+                        <label class="col-md-12">Category</label>
                         <div class="col-md-12">
                             <input 
                                 id="category"
@@ -193,7 +193,6 @@
                                 type="date" 
                                 placeholder="Please Enter A Date"
                                 class="form-control ps-0 form-control-line" 
-                                required
                             >
                         </div>
                     </div>
@@ -213,10 +212,10 @@
         <div class="expenses"> 
             {{#each transactions}}
             <div id="{{_id}}" class="expense">
-                <span class="round round-danger expense-icon">
+                <span class="round round-danger transaction-icon">
                     <img src="./custom/images/logo-icon.png" style="width:40px" alt="Expense-Icon">
                 </span>
-                <div class="align-middle exspense-title"> 
+                <div class="align-middle transaction-title"> 
                     <h6> {{title}} </h6>
                     <small class="text-muted">
                         {{#if isConstant}}
@@ -227,20 +226,22 @@
                     </small>
                 </div>
                 
-                <div class="align-middle expense-category"> 
+                <div class="align-middle transaction-category"> 
                     {{category}}
                 </div>
 
-                <div class="align-middle expense-total"> 
+                <div class="align-middle transaction-total"> 
                     {{total}}
                 </div>
 
-                <div class="align-middle expense-date"> 
+                <div class="align-middle transaction-date"> 
                     {{date}}
                 </div>
 
-                <button class="updataTransction">Edit</button>
-                <button class="deleteTransction">Delete</button>
+                <div class="transaction-action">
+                    <button class="btn btn-outline-warning updataTransction m-2"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-outline-danger deleteTransction m-2"><i class="fas fa-trash-alt"></i></button>
+                </div>
             </div>
             {{/each}}
                
@@ -251,10 +252,10 @@
         <div class="incomes">
             {{#each transactions}}
             <div id="{{_id}}" class="income">
-                <span class="round round-success expense-icon">
+                <span class="round round-success transaction-icon">
                     <img src="./custom/images/logo-icon.png" style="width:40px" alt="Expense-Icon">
                 </span>
-                <div class="align-middle exspense-title"> 
+                <div class="align-middle transaction-title"> 
                     <h6> {{title}} </h6>
                     <small class="text-muted">
                         {{#if isConstant}}
@@ -265,20 +266,20 @@
                     </small>
                 </div>
                 
-                <div class="align-middle expense-category"> 
+                <div class="align-middle transaction-category"> 
                     {{category}}
                 </div>
 
-                <div class="align-middle expense-total"> 
+                <div class="align-middle transaction-total"> 
                     {{total}}
                 </div>
 
-                <div class="align-middle expense-date"> 
+                <div class="align-middle transaction-date"> 
                     {{date}}
                 </div>
-                <div>
-                    <button class="updataTransction">Edit</button>
-                    <button class="deleteTransction">Delete</button>
+                <div class="transaction-action">
+                    <button class="btn btn-outline-warning updataTransction m-2"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-outline-danger deleteTransction m-2"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
             {{/each}}
