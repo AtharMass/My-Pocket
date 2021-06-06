@@ -1,28 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./custom/images/favicon.png">
     <title>My Pocket</title>
-</head>
-<body>
 
-    <button class="addTransction">add</button>
-    <div class="container-fluid"></div>
-    <script id="add-template" type="text/x-handlebars-template">
-    <div>koko</div>
-    
-    </script>
-    
     <script src="./jquery/dist/jquery.js"></script>
+    <script src="./selectize/dist/js/standalone/selectize.min.js"></script>
+    <!-- CSS -->
+    <link href="./assets/css/style.min.css" rel="stylesheet">
+    <link href="./custom/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="./selectize/dist/css/selectize.default.css">
+
+</head>
+
+<body>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+
+                    <a class="navbar-brand" href="./index.html">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <img src="./custom/images/logo-icon.png" alt="homepage" class="icon-logo dark-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+                            <img src="./custom/images/logo-text.png" alt="homepage" class="text-logo dark-logo" />
+
+                        </span>
+                    </a>
+
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="index.html" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
+                                    aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item">
+                            <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                                <i class="me-3 fas fa-plus" aria-hidden="true"></i>
+                                <span class="hide-menu">Add</span>
+                            </div>
+                        </li>
+                        <li class="sidebar-item">
+                            <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                                <i class="me-3  far fa-arrow-alt-circle-up" aria-hidden="true"></i>
+                                <span class="hide-menu">Expenses</span>
+                            </div>
+                        </li>
+                        <li class="sidebar-item">
+                            <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                                <i class="me-3  far fa-arrow-alt-circle-down" aria-hidden="true"></i>
+                                <span class="hide-menu">Incomes</span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+
+        <div class="page-wrapper">
+
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="page-title mb-0 p-0">Dashboard</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- Start footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                © 2021 My Pocket Developed & Designed by (Yones & ATAR & Reham & Tamer)</a>
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+
+
+
+    <script id="add-template" type="text/x-handlebars-template">
+        <div class="card">
+            <div class="card-body">
+                <form class="form-horizontal form-material mx-2">
+                    <!-- "Select isExpense" -->
+                    <div class="form-group">
+                        <div class="col-sm-12 border-bottom">
+                            <select id="isExpense" class="form-select shadow-none border-6 ps-0 form-control-line" required>
+                                <option disabled selected value> Please Select An Option 😄</option>
+                                <option value="true">Expense</option>
+                                <option value="false">Income</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Select isConstant -->
+                    <div class="form-group">
+                        <div class="col-sm-12 border-bottom">
+                            <select id="isConstant" class="form-select shadow-none border-0 ps-0 form-control-line" required>
+                                <option disabled selected value> Please Select An Option 😄</option>
+                                <option value="true">Constant</option>
+                                <option value="false">Not Constant</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form-group">
+                        <label class="col-md-12 mb-0">Title</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="title" 
+                                type="text" 
+                                placeholder="Please Enter A Title" 
+                                class="form-control ps-0 form-control-line" 
+                                minlength="3"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="form-group category-inoput">
+                        <label for="example-email" class="col-md-12">Ctegory</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="category"
+                                type="text" 
+                                placeholder="Select Category"
+                                class="form-control ps-0 form-control-line" 
+                                minlength="3"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="form-group total">
+                        <label class="col-md-12 mb-0">Total</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="total"
+                                type="number" 
+                                min="0" 
+                                value="Please Enter a value" 
+                                placeholder="Please Enter a value"
+                                class="form-control ps-0 form-control-line" 
+                                required
+                            >
+                        </div>
+                    </div>
+                   
+                  
+                    <div class="form-group submit-add">
+                        <div class="col-sm-12 d-flex">
+                            <button id="addTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script id="expenses-template" type="text/x-handlebars-template">
+        <div class="expenses">
+            <div class="expense">
+                Name
+                type
+                date
+                category price
+            </div>
+
+            <div class="expense">
+                Name
+                type
+                date
+                category price
+            </div>
+        </div>
+    </script>
+
+    <script id="incomes-template" type="text/x-handlebars-template">
+        fdgdfgdfgdfgdgdgdfgfdg
+    </script>
+
+
     <script src="./bootstrap/dist/js/bootstrap.js"></script>
     <script src="./handlebars/dist/handlebars.js"></script>
     <script src="./sweetalert2/dist/sweetalert2.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/brands.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/solid.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+<<<<<<< HEAD
+=======
+
+    <script src="./assets/js/custom.js"></script>
+    <script src="./custom/js/custom.js"></script>
+>>>>>>> master
     <script src="transactionManager.js"></script>
     <script src="renderer.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>

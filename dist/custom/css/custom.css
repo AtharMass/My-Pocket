@@ -1,0 +1,38 @@
+.topbar {
+    background: -webkit-gradient(linear,left top,right top,from(#00bdda),to(#0178bc));
+    background: -o-linear-gradient(left,#00bdda 0%,#0178bc 100%);
+    background: linear-gradient(to right,#00bdda 0%,#0178bc 100%);
+    height: 75px;
+
+}
+.icon-logo{
+    width: 65px;
+    height: 70px;
+}
+.text-logo{
+    width: 148px;
+} 
+ .top-navbar .navbar-header[data-logobg=skin6], #main-wrapper[data-layout=vertical] .topbar .top-navbar .navbar-header[data-logobg=skin6] {
+    background: transparent;
+}
+
+.navbar-brand{
+    padding: 0 !important;
+    margin: 2px;
+}
+
+.expenses{
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.expense{
+    border:1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.nav-toggler{
+    color: white !important;
+    font-size: 20px
+}
