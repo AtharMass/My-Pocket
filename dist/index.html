@@ -181,11 +181,25 @@
                             >
                         </div>
                     </div>
+
+                    <!-- Dtae -->
+                    <div class="form-group">
+                        <label class="col-md-12 mb-0">Date</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="date"
+                                type="date" 
+                                placeholder="Please Enter A Date"
+                                class="form-control ps-0 form-control-line" 
+                                required
+                            >
+                        </div>
+                    </div>
                    
                   
                     <div class="form-group submit-add">
                         <div class="col-sm-12 d-flex">
-                            <button id="addTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
+                            <button type="button" id="addTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -200,6 +214,8 @@
                 <div> {{title}}</div>
                 <div> {{category}} </div>
                 <div> {{total}} </div>
+                <div>{{date}}</div>
+                
                 <div>{{isConstant}}</div>
                 <div>{{isExpense}}</div>
             </div>
@@ -214,6 +230,7 @@
                 <div> {{title}}</div>
                 <div> {{category}} </div>
                 <div> {{total}} </div>
+                <div>{{date}}</div>
                 <div>{{isConstant}}</div>
                 <div>{{isExpense}}</div>
             </div>

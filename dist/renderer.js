@@ -1,7 +1,3 @@
-
-
-
-
 class Renderer {
 
     constructor() {

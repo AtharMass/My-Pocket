@@ -1,8 +1,3 @@
-
-
-
-
-
 const render = new Renderer()
 const transactionManager = new TransactionManager()
 
@@ -28,23 +23,20 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
 })
 
 
-$('form').on('click','#addTransction',function(){
-    const title = $(this).closest('form').find('#title').text
-    console.log(title)
-    const category = $(this).closest('form').find('#category').text
-    console.log(category)
-    let categoryForm = "Food"
-    let dateForm = 10-01-2020
-    let totalForm = 23444
-    let titleForm = "Hamosad"
+$(document).on('click','#addTransction',function(){
+    const title = $(this).closest('form').find('#title')
+    const category = $(this).closest('form').find('#category')
+    const date = $(this).closest('form').find('#date')
+    const total = $(this).closest('form').find('#total')
+   
     let isExpenseForm = true
     let isConstantForm = true
 
     let obj = {
-        category: categoryForm,
-        date: dateForm,
-        total: totalForm,
-        title: titleForm,
+        category: category.val(),
+        date: date.val(),
+        total: total.val(),
+        title: title.val(),
         isExpense: isExpenseForm,
         isConstant: isConstantForm
     }
