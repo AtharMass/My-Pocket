@@ -153,7 +153,7 @@
 
                     <!-- Category -->
                     <div class="form-group category-inoput">
-                        <label for="example-email" class="col-md-12">Ctegory</label>
+                        <label class="col-md-12">Ctegory</label>
                         <div class="col-md-12">
                             <input 
                                 id="category"
@@ -195,19 +195,15 @@
 
     <script id="expenses-template" type="text/x-handlebars-template">
         <div class="expenses">
+            {{#each transactions}}
             <div class="expense">
-                Name
-                type
-                date
-                category price
+                <div> {{title}}</div>
+                <div> {{category}} </div>
+                <div> {{total}} </div>
+                <div>{{isConstant}}</div>
+                <div>{{isExpense}}</div>
             </div>
-
-            <div class="expense">
-                Name
-                type
-                date
-                category price
-            </div>
+            {{/each}}
         </div>
     </script>
 
