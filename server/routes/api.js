@@ -34,5 +34,16 @@ router.get('/transactions/expense/:isExpense', function (req, res) {
         })
 })
 
+router.delete('/transaction/:id', function (req, res) { // work
+    let { id } = req.params
+    Transaction.deleteOne({ _id: id })
+        .exec((err, success) => {
+            if (success === null) {
+                res.send(`Not find`)
+            } else {
+                res.send(`Delete`)
+            }
+        })
+})
 
 module.exports = router

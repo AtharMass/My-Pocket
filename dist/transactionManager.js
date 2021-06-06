@@ -14,7 +14,6 @@ class TransactionManager {
                 reject(e)
             }
         });
-        // return this.transactionsData
     }
 
     saveTransaction = async function(data){
@@ -32,17 +31,13 @@ class TransactionManager {
     }
 
     removeTransaction = async function (id,isExpense) { 
-
         return new Promise(async (resolve, reject) => {
-
             try {
                 const deleteActionResp = await $.ajax({
                     url: `transaction/${id}`,
                     type: 'DELETE'
                 });
-        
                 await this.getTransactionExpenseFromDB(isExpense)
-    
                 resolve(this.transactionsData)
             } catch (e) {
                 reject(e)
@@ -50,8 +45,7 @@ class TransactionManager {
         });
     }
 
-    updateTransaction = async function (id,updateObj) { // good
-
+    updateTransaction = async function (id,updateObj) { 
         return $.ajax({
             url: `transaction/${id}`,
             type: 'PUT',
