@@ -44,7 +44,7 @@ $(document).on('click','#addTransction',function(){
     transactionManager.saveTransaction(obj)
 }) 
 
-$(document).on('click','#updataTransction',function(){
+$(document).on('click','.updataTransction',function(){
     const id = $(this).closest('.expense').attr('id')
     const title = $(this).closest('form').find('#title')
     const category = $(this).closest('form').find('#category')
@@ -66,7 +66,7 @@ $(document).on('click','#updataTransction',function(){
 
 })
 
-$(document).on('click','#deleteTransction',function(){
+$(document).on('click','.deleteTransction',function(){
     const id = $(this).closest('form').find('#title')
     mangerTransction.removeTransaction(id.val())
 })
