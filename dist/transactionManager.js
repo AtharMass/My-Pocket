@@ -21,7 +21,6 @@ class TransactionManager {
 
     saveTransaction = async function(data){
         await $.post('/transaction',data, function (res) {
-
             if(res.code === 200){
                 Swal.fire({
                     icon: 'success',
@@ -57,13 +56,14 @@ class TransactionManager {
     }
 
     updateTransaction = async function (id,updateObj) { 
+        console.log(id);
         return $.ajax({
             url: `transaction/${id}`,
             type: 'PUT',
             data: updateObj,
             success: function (transaction) {
                
-                console.log(transaction);
+                console.log("trans: ",transaction);
             }
         });
     }

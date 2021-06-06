@@ -3,10 +3,13 @@ const router = express.Router()
 const Transaction = require('../models/Transactions')
 const moment = require('moment')
 
+
+
+
+  
 router.post('/transaction', function (request, response) { 
     let data = request.body
     let result ={}
-    
     let newTrans = new Transaction({
         category: data.category,
         date:  data.date || moment() ,
@@ -15,8 +18,7 @@ router.post('/transaction', function (request, response) {
         isExpense: data.isExpense,
         isConstant: data.isConstant
     })
-
-    if ( data.title !== '' && data.total !== '' && data.category !== '' ) {
+    if ( data.title !== '' && data.total !== '' && data.category !== '') {
         const savePromise = newTrans.save()
         savePromise.then( saved => {
             console.log(saved)

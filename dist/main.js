@@ -3,6 +3,7 @@ const transactionManager = new TransactionManager()
 
 let idTemplate = "expenses"
 let isExpense = "true"
+
 const setSelectedItem = function(element){
     $("li").removeClass('selected')
     $("li").find("div").removeClass('active')
@@ -19,6 +20,7 @@ const checkIfExpense = function (){
         isExpense = "false"
     }
 }
+
 $('#sidebarnav').on('click',".sidebar-item", async function(){
     idTemplate = setSelectedItem($(this))
     checkIfExpense()
@@ -26,7 +28,6 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
     render.setTemplate(idTemplate)
     render.renderData(transactionManager.transactionsData)
 })
-
 
 $(document).on('click','#addTransction',async function(){
     const title = $(this).closest('form').find('#title')
@@ -92,8 +93,7 @@ $(document).on('click','.deleteTransction',function(){
                 `The data has been deleted. 😔`,
                 'success'
             )
-            console.log("idTemplate:",idTemplate)
-            console.log("DATA: ",transactionManager.transactionsData);
+           
             
             render.setTemplate(idTemplate)
             render.renderData(transactionManager.transactionsData)
@@ -112,3 +112,4 @@ $(document).on('click','.deleteTransction',function(){
     })
 
 })
+
