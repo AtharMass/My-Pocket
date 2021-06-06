@@ -6,16 +6,24 @@
 const render = new Renderer()
 const transactionManager = new TransactionManager()
 
-$('#sidebarnav').on('click',".sidebar-item", function(){
+const setSelectedItem = function(element){
     $("li").removeClass('selected')
     $("li").find("div").removeClass('active')
-    $(this).addClass('selected')
-    $(this).find("div").addClass('active')
-
-    const id = $(this).find("div").text().trim().toLowerCase()
-
+    element.addClass('selected')
+    element.find("div").addClass('active')
+    const id = element.find("div").text().trim().toLowerCase()
+    return id
+}
+$('#sidebarnav').on('click',".sidebar-item", async function(){
+    let id = setSelectedItem($(this))
     if(id == "expenses"){
-        transactionManager.getTransactionExpenseFromDB("true")
+        await transactionManager.getTransactionExpenseFromDB("true")
+        render.setTemplate(id)
+        render.renderData(transactionManager.transactionsData)
+    }else{
+        await transactionManager.getTransactionExpenseFromDB("false")
+        render.setTemplate(id)
+        render.renderData(transactionManager.transactionsData)
     }
 })
 

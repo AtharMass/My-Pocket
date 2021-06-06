@@ -20,4 +20,12 @@ router.post('/transaction', function (request, response) {
 })
 
 
+router.get('/transactions/expense/:isExpense', function (req, res) { // work
+    let { isExpense } = req.params
+    Transaction.find({ isExpense })
+        .exec(function (err, transactions) {
+            res.send(transactions)
+        })
+})
+
 module.exports = router
