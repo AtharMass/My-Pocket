@@ -208,7 +208,17 @@
     </script>
 
     <script id="incomes-template" type="text/x-handlebars-template">
-        fdgdfgdfgdfgdgdgdfgfdg
+        <div class="incomes">
+            {{#each transactions}}
+            <div class="income">
+                <div> {{title}}</div>
+                <div> {{category}} </div>
+                <div> {{total}} </div>
+                <div>{{isConstant}}</div>
+                <div>{{isExpense}}</div>
+            </div>
+            {{/each}}
+        </div>
     </script>
 
 
