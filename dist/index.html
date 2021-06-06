@@ -238,6 +238,9 @@
                 <div class="align-middle expense-date"> 
                     {{date}}
                 </div>
+
+                <button class="updataTransction">Edit</button>
+                <button class="deleteTransction">Delete</button>
             </div>
             {{/each}}
                
@@ -245,18 +248,10 @@
     </script>
 
     <script id="incomes-template" type="text/x-handlebars-template">
-<<<<<<< HEAD
         <div class="incomes">
             {{#each transactions}}
             <div id="{{_id}}" class="income">
                 <span class="round round-success expense-icon">
-=======
-       
-        <div class="incomes">
-            {{#each transactions}}
-            <div id="{{_id}}" class="income">
-                <span class="round round-danger expense-icon">
->>>>>>> frontend-design
                     <img src="./custom/images/logo-icon.png" style="width:40px" alt="Expense-Icon">
                 </span>
                 <div class="align-middle exspense-title"> 
@@ -280,6 +275,10 @@
 
                 <div class="align-middle expense-date"> 
                     {{date}}
+                </div>
+                <div>
+                    <button class="updataTransction">Edit</button>
+                    <button class="deleteTransction">Delete</button>
                 </div>
             </div>
             {{/each}}
