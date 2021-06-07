@@ -56,13 +56,11 @@ class TransactionManager {
     }
 
     updateTransaction = async function (id,updateObj) { 
-        console.log(id);
         return $.ajax({
             url: `transaction/${id}`,
             type: 'PUT',
             data: updateObj,
             success: function (transaction) {
-               
                 console.log("trans: ",transaction);
             }
         });

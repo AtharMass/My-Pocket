@@ -212,12 +212,12 @@
         <div class="card">
             <div class="card-body">
                 {{#each transactions}}
-                <form id="form-edit" class="form-horizontal form-material mx-2">
+                <form id="{{_id}}" class="form-horizontal form-material mx-2 form-edit">
                     <!-- "Select isExpense" -->
                     <div class="form-group">
                         <div class="col-sm-12 border-bottom">
                             <label class="col-md-12 mb-0">Please Enter A Type Of Transaction</label>
-                            <select class="form-select shadow-none border-6 ps-0 form-control-line" required>
+                            <select id="edit-isExpense" class="form-select shadow-none border-6 ps-0 form-control-line" required>
                                 {{#if isExpense}} 
                                 <option value="true" selected >Expense</option>
                                 <option value="false">Income</option>
@@ -234,7 +234,7 @@
                     <div class="form-group">
                         <div class="col-sm-12 border-bottom">
                             <label class="col-md-12 mb-0">Please Enter If It Constant Or Not</label>
-                            <select class="form-select shadow-none border-0 ps-0 form-control-line" required>
+                            <select id="edit-isConstant" class="form-select shadow-none border-0 ps-0 form-control-line" required>
                                 {{#if isConstant}} 
                                 <option value="true" selected >Constant</option>
                                 <option value="false">Not Constant</option>
@@ -252,7 +252,7 @@
                         <label class="col-md-12 mb-0">Title</label>
                         <div class="col-md-12">
                             <input 
-                                id="title" 
+                                id="edit-title" 
                                 type="text" 
                                 placeholder="Please Enter A Title" 
                                 class="form-control ps-0 form-control-line" 
@@ -268,7 +268,7 @@
                         <label class="col-md-12">Category</label>
                         <div class="col-md-12">
                             <input 
-                                id="category"
+                                id="edit-category"
                                 type="text" 
                                 placeholder="Select Category"
                                 class="form-control ps-0 form-control-line" 
@@ -284,7 +284,7 @@
                         <label class="col-md-12 mb-0">Total</label>
                         <div class="col-md-12">
                             <input 
-                                id="total"
+                                id="edit-total"
                                 type="number" 
                                 min="0" 
                                 placeholder="Please Enter a value"
@@ -300,7 +300,7 @@
                         <label class="col-md-12 mb-0">Date</label>
                         <div class="col-md-12">
                             <input 
-                                id="date"
+                                id="edit-date"
                                 type="date" 
                                 placeholder="{{date}}"
                                 class="form-control ps-0 form-control-line" 
@@ -312,7 +312,7 @@
                   
                     <div class="form-group submit-add">
                         <div class="col-sm-12 d-flex">
-                            <button type="button" id="addTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
+                            <button type="button" id="editTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
                         </div>
                     </div>
                 </form>

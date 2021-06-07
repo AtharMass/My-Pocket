@@ -35,7 +35,6 @@ router.post('/transaction', function (request, response) {
    response.send(result)
 })
 
-
 router.get('/transactions/expense/:isExpense', function (req, res) {
     let { isExpense } = req.params
     Transaction
@@ -56,6 +55,24 @@ router.delete('/transaction/:id', function (req, res) {
                 res.send(`Delete`)
             }
         })
+})
+
+router.put('/transaction/:id', function (request, response) {
+    let data = request.body
+    let { id } = request.params
+
+    Transaction.updateOne({ _id: id },
+        {
+            $set:
+            [
+                { category : data.category },
+                { date : data.date },
+                { price : data.price },
+                { isExpense : data.isExpense },
+                { isConstant : data.isConstant }
+            ]
+        })   
+        response.send(`Update`)  
 })
 
 module.exports = router

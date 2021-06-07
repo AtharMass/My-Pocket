@@ -3,6 +3,7 @@ const transactionManager = new TransactionManager()
 
 let idTemplate = "expenses"
 let isExpense = true
+
 const setSelectedItem = function(element){
     $("li").removeClass('selected')
     $("li").find("div").removeClass('active')
@@ -49,6 +50,30 @@ $(document).on('click','#addTransction',async function(){
     render.renderData(transactionManager.transactionsData)
 }) 
 
+$(document).on('click','#editTransction',async function(){
+    const id = $(this).closest('.form-edit').attr("id")
+    const title = $(this).closest('.form-edit').find('#edit-title')
+    const category = $(this).closest('.form-edit').find('#edit-category')
+    const date = $(this).closest('.form-edit').find('#edit-date')
+    const total = $(this).closest('.form-edit').find('#edit-total')
+    const isConstant =  $(this).closest('.form-edit').find('#edit-isConstant')
+    const isExpense =  $(this).closest('.form-edit').find('#edit-isExpense')
+   
+
+    let obj = {
+        category: category.val(),
+        date: date.val(),
+        total: total.val(),
+        title: title.val(),
+        isExpense: isExpense.val(),
+        isConstant: isConstant.val()
+    }
+   
+    await transactionManager.updateTransaction(id,obj)
+    // render.setTemplate("add")
+    // render.renderData(transactionManager.transactionsData)
+}) 
+
 $(document).on('click','.updataTransction',function(){
     const idExpense = $(this).closest('.expense').attr("id")
     const idIncome = $(this).closest('.income').attr("id")
@@ -68,7 +93,8 @@ $(document).on('click','.updataTransction',function(){
         total: total,
         title: title,
         isExpense: isExpense,
-        isConstant: isConstant
+        isConstant: isConstant,
+        _id : id
     }]
 
     render.setTemplate("edit")
