@@ -23,6 +23,7 @@
     "mongoose": "^5.12.13",
     "path": "^0.12.7",
     "request": "^2.88.2",
+    "select2": "^4.1.0-rc.0",
     "selectize": "^0.12.6",
     "sweetalert2": "^11.0.16"
   }
