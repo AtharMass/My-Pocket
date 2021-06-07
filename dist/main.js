@@ -222,4 +222,33 @@ const countExpensesAndIncomes = async () => {
     return myChart
 }
 
+ $(document).on('click','#searchTransction',function(){
+    const title = "Drby Bar"
+    const category =  "Resturant"
+    const firstDate = "20-01-2020"
+    const lastDate = "25-01-2020"
+    const firsTtotal = 500
+    const lastTotal = 700
+    const isConstant =  true
+    const dateOperator = "="
+    const totalOperator = ">"
+   
+    let searchObj = {
+        category : category,
+        title : title,
+        firstDate: firstDate,
+        lastDate: lastDate,
+        firsTtotal: firsTtotal,
+        lastTotal: lastTotal,
+        isConstant: isConstant,
+        dateOperator : dateOperator,
+        totalOperator : totalOperator
+    }
+
+   
+    transactionManager.searchTransaction(searchObj)
+    // render.setTemplate("search")
+    // render.renderData(transactionManager.transactionsData)
+}) 
+
 

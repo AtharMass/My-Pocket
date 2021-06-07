@@ -11,30 +11,30 @@ class TransactionManager {
             try {
                 const data = await $.get(`/transactions/${isExpense}`)
                 data.forEach((el) => {
-                    el.date =  moment(el.date).format('YYYY-MM-DD')
+                    el.date = moment(el.date).format('YYYY-MM-DD')
                 })
                 this.transactionsData = data
                 resolve(data)
-            }catch(e) {
+            } catch (e) {
                 reject(e)
             }
         });
     }
 
-    saveTransaction = async function(data){
-        await $.post('/transaction',data, function (res) {
-            if(res.code === 200){
+    saveTransaction = async function (data) {
+        await $.post('/transaction', data, function (res) {
+            if (res.code === 200) {
                 Swal.fire({
                     icon: 'success',
                     title: `Nice, ${res.message}`,
                     showConfirmButton: false,
                     timer: 2000
                 })
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: `Oops..., Something went wrong!`,
-                    text: `${res.message}`,  
+                    text: `${res.message}`,
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -42,7 +42,7 @@ class TransactionManager {
         })
     }
 
-    removeTransaction = async function (id,isExpense) { 
+    removeTransaction = async function (id, isExpense) {
         return new Promise(async (resolve, reject) => {
             try {
                 const deleteActionResp = await $.ajax({
@@ -57,28 +57,28 @@ class TransactionManager {
         });
     }
 
-    updateTransaction = async function (id,updateObj) { 
+    updateTransaction = async function (id, updateObj) {
         return new Promise(async (resolve, reject) => {
             try {
                 const updateActionResp = await $.ajax({
                     url: `transaction/${id}`,
-                    data : updateObj,
+                    data: updateObj,
                     type: 'PUT'
                 });
                 await this.getTransactionExpenseFromDB(updateObj.isExpense)
                 resolve(this.transactionsData)
-                if(updateActionResp.code == 200){
+                if (updateActionResp.code == 200) {
                     Swal.fire({
                         icon: 'success',
                         title: `Nice, ${updateActionResp.msg}`,
                         showConfirmButton: false,
                         timer: 2000
                     })
-                }else{
+                } else {
                     Swal.fire({
                         icon: 'error',
                         title: `Oops..., Something went wrong!`,
-                        text: `${updateActionResp.msg}`,  
+                        text: `${updateActionResp.msg}`,
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -88,4 +88,52 @@ class TransactionManager {
             }
         });
     }
+
+    searchTransaction = async function (searchObj) {
+        const data = await $.get('/filter/transactions' , searchObj, function(req,res){
+            console.log(res);
+        })
+        return data
+        // , function (req, res) {
+        //     console.log("in search ->  req =  ", req, "   res = ", res)
+
+
+        // })
+        //   return  $.ajax({
+        //         url: `/transactions/a`,
+        //         data: s,
+        //         type: 'GET'
+        //     });
+    
+    //         return new Promise(async (resolve, reject) => {
+    //             try {
+    //                 const updateActionResp = await $.ajax({
+    //                     url: `transactions`,
+    //                     data : searchObj,
+    //                     type: 'GET'
+    //                 });
+    //                 // await this.getTransactionExpenseFromDB(updateObj.isExpense)
+    //                 // resolve(this.transactionsData)
+    //                 // if(updateActionResp.code == 200){
+    //                 //     Swal.fire({
+    //                 //         icon: 'success',
+    //                 //         title: `Nice, ${updateActionResp.msg}`,
+    //                 //         showConfirmButton: false,
+    //                 //         timer: 2000
+    //                 //     })
+    //                 // }else{
+    //                 //     Swal.fire({
+    //                 //         icon: 'error',
+    //                 //         title: `Oops..., Something went wrong!`,
+    //                 //         text: `${updateActionResp.msg}`,  
+    //                 //         showConfirmButton: false,
+    //                 //         timer: 2000
+    //                 //     })
+    //                 // }
+    //             } catch (e) {
+    //                 reject(e)
+    //             }
+    //         });
+    //     }
+}
 }

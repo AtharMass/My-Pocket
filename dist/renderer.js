@@ -11,9 +11,7 @@ class Renderer {
     }
     setTemplate(templateId){
          this.source = $(`#${templateId}-template`).html()
-         this.template = Handlebars.compile(this.source)
-       
-        
+         this.template = Handlebars.compile(this.source) 
     }
 
 }
