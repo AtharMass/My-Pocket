@@ -69,12 +69,18 @@
                         </li>
                         <li class="sidebar-item">
                             <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                                <i class="me-3 fas fa-search" aria-hidden="true"></i>
+                                <span class="hide-menu">Search</span>
+                            </div>
+                        </li>
+                        <li class="sidebar-item">
+                            <div class="sidebar-link waves-effect waves-dark sidebar-link expenses" aria-expanded="false">
                                 <i class="me-3  far fa-arrow-alt-circle-up" aria-hidden="true"></i>
                                 <span class="hide-menu">Expenses</span>
                             </div>
                         </li>
                         <li class="sidebar-item">
-                            <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                            <div class="sidebar-link waves-effect waves-dark sidebar-link incomes" aria-expanded="false">
                                 <i class="me-3  far fa-arrow-alt-circle-down" aria-hidden="true"></i>
                                 <span class="hide-menu">Incomes</span>
                             </div>
@@ -88,7 +94,6 @@
         </aside>
 
         <div class="page-wrapper">
-
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-md-6 col-8 align-self-center">
@@ -96,7 +101,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="container-fluid">
 
             </div>
@@ -127,7 +131,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <canvas class="card-body" id="myChart2" >
-                     
+     
                     </canvas>
                 </div>
             </div>
@@ -222,7 +226,103 @@
                   
                     <div class="form-group submit-add">
                         <div class="col-sm-12 d-flex">
-                            <button type="button" id="addTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
+                            <button type="button" id="addTransction" class="btn btn-success mx-auto mx-md-0 text-white">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script id="search-template" type="text/x-handlebars-template">
+        <div class="card">
+            <div class="card-body">
+                <form id="form-search" class="form-horizontal form-material mx-2">
+                    <!-- "Select isExpense" -->
+                    <div class="form-group">
+                        <div class="col-sm-12 border-bottom">
+                            <label class="col-md-12 mb-0">Please Enter A Type Of Transaction</label>
+                            <select id="isExpense" class="form-select shadow-none border-6 ps-0 form-control-line" required>
+                                <option value="true">Expense</option>
+                                <option value="false">Income</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Select isConstant -->
+                    <div class="form-group">
+                        <div class="col-sm-12 border-bottom">
+                            <label class="col-md-12 mb-0">Please Enter If It Constant Or Not</label>
+                            <select id="isConstant" class="form-select shadow-none border-0 ps-0 form-control-line" required>
+                                <option value="true">Constant</option>
+                                <option value="false">Not Constant</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form-group">
+                        <label class="col-md-12 mb-0">Title</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="title" 
+                                type="text" 
+                                placeholder="Please Enter A Title" 
+                                class="form-control ps-0 form-control-line" 
+                                minlength="3"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="form-group">
+                        <label class="col-md-12">Category</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="category"
+                                type="text" 
+                                placeholder="Select Category"
+                                class="form-control ps-0 form-control-line" 
+                                minlength="3"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="form-group">
+                        <label class="col-md-12 mb-0">Total</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="total"
+                                type="number" 
+                                min="0" 
+                                value="Please Enter a value" 
+                                placeholder="Please Enter a value"
+                                class="form-control ps-0 form-control-line" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Dtae -->
+                    <div class="form-group">
+                        <label class="col-md-12 mb-0">Date</label>
+                        <div class="col-md-12">
+                            <input 
+                                id="date"
+                                type="date" 
+                                placeholder="Please Enter A Date"
+                                class="form-control ps-0 form-control-line" 
+                            >
+                        </div>
+                    </div>
+                   
+                  
+                    <div class="form-group submit-add">
+                        <div class="col-sm-12 d-flex">
+                            <button type="button" id="searchTransction" class="btn btn-success mx-auto mx-md-0 text-white">Search</button>
                         </div>
                     </div>
                 </form>
@@ -334,7 +434,7 @@
                   
                     <div class="form-group submit-add">
                         <div class="col-sm-12 d-flex">
-                            <button type="button" id="editTransction" class="btn btn-success mx-auto mx-md-0 text-white">Submit</button>
+                            <button type="button" id="editTransction" class="btn btn-success mx-auto mx-md-0 text-white">Update</button>
                         </div>
                     </div>
                 </form>

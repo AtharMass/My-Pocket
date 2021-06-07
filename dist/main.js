@@ -9,8 +9,9 @@ const setSelectedItem = function(element){
     $("li").find("div").removeClass('active')
     element.addClass('selected')
     element.find("div").addClass('active')
-    const id = element.find("div").text().trim().toLowerCase()
-    return id
+    const id = element.find("div").text().trim()
+    $('.page-title').text(id)
+    return id.toLowerCase()
 }
 
 const checkIfExpense = function (){
@@ -27,7 +28,8 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
     await transactionManager.getTransactionExpenseFromDB(isExpense)
     render.setTemplate(idTemplate)
     render.renderData(transactionManager.transactionsData)
-    countExpensesAndIncomes()
+    if(idTemplate === "dashboard")
+        countExpensesAndIncomes()
 })
 
 $(document).on('click','#addTransction',async function(){
@@ -58,7 +60,7 @@ $(document).on('click','#editTransction',async function(){
     const date = $(this).closest('.form-edit').find('#edit-date')
     const total = $(this).closest('.form-edit').find('#edit-total')
     const isConstant =  $(this).closest('.form-edit').find('#edit-isConstant')
-    const isExpense =  $(this).closest('.form-edit').find('#edit-isExpense')
+    const isExpenseFromUpdate =  $(this).closest('.form-edit').find('#edit-isExpense')
    
 
     let obj = {
@@ -66,13 +68,30 @@ $(document).on('click','#editTransction',async function(){
         date: date.val(),
         total: total.val(),
         title: title.val(),
-        isExpense: isExpense.val(),
+        isExpense: isExpenseFromUpdate.val(),
         isConstant: isConstant.val()
     }
    
-    await transactionManager.updateTransaction(id,obj)
-    // render.setTemplate("add")
-    // render.renderData(transactionManager.transactionsData)
+    let objUpdated = await transactionManager.updateTransaction(id,obj)
+    const updatedObj = objUpdated.find(o =>  o._id === id)
+    isExpense = updatedObj.isExpense
+    idTemplate =isExpense ? "expenses" : "incomes"
+
+    await transactionManager.getTransactionExpenseFromDB(isExpense)
+
+    $(".sidebar-item").each(function( indx ) {
+        $(".sidebar-item").removeClass('selected')
+        $(".sidebar-item").find("div").removeClass('active')
+
+        if (isExpense){
+            $(".sidebar-item").find(".expenses").addClass("active")
+        }else{
+            $(".sidebar-item").find(".incomes").addClass("active")
+        }
+    })
+
+    render.setTemplate(idTemplate)
+    render.renderData(objUpdated)
 }) 
 
 $(document).on('click','.updataTransction',function(){
@@ -100,7 +119,6 @@ $(document).on('click','.updataTransction',function(){
 
     render.setTemplate("edit")
     render.renderData(obj)
-    // transactionManager.updateTransaction(id, updateObj)
 
 })
 
