@@ -3,6 +3,8 @@ class Renderer {
     constructor() {
         this.source =''
         this.template = Handlebars.compile(this.source);
+        const filterTemplate = $(`#filter-template`).html()
+        Handlebars.registerPartial('filter', filterTemplate);
     }
     renderData(transactions) {
         $('.container-fluid').empty()

@@ -222,40 +222,32 @@ const countExpensesAndIncomes = async () => {
     return myChart
 }
 
- $(document).on('click','#filterData',function(){
+ $(document).on('click','#filterData',async function(){
+    let searchObj = {isExpense: isExpense}
     let title = $(this).closest(".card").find("#title-filter")
-    title = title.val() || ''
+    searchObj.title = (title.val() ?? '') !== '' ? title.val() : undefined
     let category = $(this).closest(".card").find("#category-filter")
-    category = category.val() || ''
-    console.log("title: ",title)
+    searchObj.category = (category.val() ?? '') !== '' ? category.val() : undefined
     let minTotal = $(this).closest(".card").find("#min-total")
-    minTotal = minTotal.val() || ''
+    searchObj.minTotal = (minTotal.val() ?? '') !== '' ? minTotal.val() : undefined
     let maxTotal = $(this).closest(".card").find("#max-total")
-    maxTotal =  maxTotal.val() || ''
-    let isEqual = $(this).closest(".card").find("#isEqual")
-    isEqual =  isEqual.val() || ''
+    searchObj.maxTotal = (maxTotal.val() ?? '') !== '' ? maxTotal.val() : undefined
     let isConstant = $(this).closest(".card").find("#isConstant-filter")
-    isConstant =  isConstant.val() || ''
-    let fromDate = $(this).closest(".card").find("from-date")
-    fromDate =  fromDate.val() || ''
-    let toDate = $(this).closest(".card").find("to-date")
-    toDate =  toDate.val() || ''
-
+    searchObj.isConstant = (isConstant.val() ?? '') !== '' ? isConstant.val() : undefined
+    let fromDate = $(this).closest(".card").find("#from-date")
+    searchObj.fromDate = (fromDate.val() ?? '') !== '' ? fromDate.val() : undefined
+    let toDate = $(this).closest(".card").find("#to-date")
+    searchObj.toDate = (toDate.val() ?? '') !== '' ? toDate.val() : undefined
    
-    let searchObj = {
-         category : category,
-         title : title,
-         firstDate: fromDate,
-         lastDate: toDate,
-         firsTtotal: minTotal,
-         lastTotal: maxTotal,
-         isConstant: isConstant,
-         isEqual : isEqual
-    }
     console.log(searchObj)
-    transactionManager.searchTransaction(searchObj)
-    // render.setTemplate("search")
-    // render.renderData(transactionManager.transactionsData)
+  
+    const data = await transactionManager.searchTransaction(searchObj)
+    data.forEach((el) => {
+        el.date = moment(el.date).format('YYYY-MM-DD')
+    })
+    transactionManager.transactionsData = data
+    render.setTemplate(idTemplate)
+    render.renderData(transactionManager.transactionsData)
 }) 
 
 
