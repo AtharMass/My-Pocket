@@ -55,9 +55,12 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="index.html" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
-                                    aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> 
+                            <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                               <i class="me-3 far fa-clock fa-fw" aria-hidden="true"></i>
+                               <span class="hide-menu">Dashboard</span>
+                            </div>
+                        </li>
                         <li class="sidebar-item">
                             <div class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="me-3 fas fa-plus" aria-hidden="true"></i>
@@ -109,6 +112,27 @@
             <!-- ============================================================== -->
         </div>
     </div>
+
+
+    <script id="dashboard-template" type="text/x-handlebars-template">
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6">
+                <div class="card">
+                    <canvas class="card-body" id="myChart" >
+                     
+                    </canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <canvas class="card-body" id="myChart2" >
+                     
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </script>
 
     <script id="add-template" type="text/x-handlebars-template">
         <div class="card">
@@ -400,6 +424,7 @@
     <script src="./bootstrap/dist/js/bootstrap.js"></script>
     <script src="./handlebars/dist/handlebars.js"></script>
     <script src="./sweetalert2/dist/sweetalert2.js"></script>
+    <script src="./chart.js/dist/chart.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/brands.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/solid.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/fontawesome.js"></script>
@@ -408,6 +433,7 @@
     <script src="transactionManager.js"></script>
     <script src="renderer.js"></script>
     <script src="main.js"></script>
+
 </body>
 
 </html>
