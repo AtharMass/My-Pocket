@@ -110,3 +110,9 @@ canvas{
     height: 70% !important;
     margin: auto;
 }
+
+.filter{
+    margin: 5px;
+    width: 100%;
+    border-radius: 5px;
+}
