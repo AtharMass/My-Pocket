@@ -26,6 +26,7 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
     await transactionManager.getTransactionExpenseFromDB(isExpense)
     render.setTemplate(idTemplate)
     render.renderData(transactionManager.transactionsData)
+    countExpensesAndIncomes()
 })
 
 $(document).on('click','#addTransction',async function(){
@@ -119,3 +120,60 @@ $(document).on('click','.deleteTransction',function(){
 
 })
 
+$(document).ready(async function(){
+    render.setTemplate("dashboard")
+    render.renderData([])
+
+    await countExpensesAndIncomes()
+   
+
+    var ctx2 =  $('#myChart2')
+    var myChart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: [
+                'Constant Expense',
+                'Not Constant Expense',
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [300, 50],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+})
+
+const countExpensesAndIncomes = async () => {
+
+    const countExpenses = await  transactionManager.getTransactionExpenseFromDB(true)
+    const countIncomes = await  transactionManager.getTransactionExpenseFromDB(false)
+
+    const ctx =  $('#myChart')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                'Expense',
+                'Incomes',
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [
+                    countExpenses.length, 
+                    countIncomes.length],
+                backgroundColor: [
+                  'rgb(246, 45, 81)',
+                  'rgb(43, 158, 58)'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+    return myChart
+}
