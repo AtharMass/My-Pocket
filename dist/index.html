@@ -16,7 +16,8 @@
     <link href="./custom/css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="./selectize/dist/css/selectize.default.css">
     <link rel="stylesheet" href="./sweetalert2/dist/sweetalert2.css">
-
+    <link href="./select2/dist/css/select2.min.css" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -28,7 +29,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
 
-                    <a class="navbar-brand" href="./index.html">
+                    <a class="navbar-brand">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <img src="./custom/images/logo-icon.png" alt="homepage" class="icon-logo dark-logo" />
@@ -101,8 +102,9 @@
                     </div>
                 </div>
             </div>
+           
             <div class="container-fluid">
-
+               
             </div>
 
             <!-- ============================================================== -->
@@ -444,6 +446,11 @@
     </script>
 
     <script id="expenses-template" type="text/x-handlebars-template">
+        <div class="card">
+            <div class="card-body">
+                dsfg
+            </div>
+        </div>
         <div class="expenses"> 
             {{#each transactions}}
             <div id="{{_id}}" class="expense">
@@ -484,6 +491,54 @@
     </script>
 
     <script id="incomes-template" type="text/x-handlebars-template">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-md-4 col-sm-12">
+                        <select id="isExpense" class="form-select form-control  bg-light border" >
+                            <option value="true"> Expense</option>
+                            <option value="false"> Income</option>
+                        </select>
+                    </div>
+                    <div class="col  col-md-4 col-sm-12">
+                        <input type="text" id="category-filter" class="form-control p-1 border bg-light" placeholder="Category">
+                    </div>
+                    <div class="col  col-md-4 col-sm-12">
+                        <input type="text" id="title-category" class="form-control p-1 border bg-light" placeholder="Title">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col  col-md-2">
+                        <input type="number" id="title-category" class="form-control p-1 border bg-light" placeholder="Min Total">
+                    </div>
+
+                    <div class="col col-md-1">
+                        <select id="isExpense" class="form-select form-control bg-light border" >
+                            <option value="gt"> > </option>
+                            <option value="lt"> < </option>
+                            <option value="eq"> = </option>
+                        </select>
+                    </div>
+                    
+                    <div class="col  col-md-2">
+                        <input type="number" id="title-category" class="p-1 border bg-light form-control" placeholder="Max Total">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col col-md-2">
+                        <input type="text" id="from-date" class="p-1 border bg-light form-control" placeholder="From Date ">
+                    </div>
+                    <div class="col col-md-2">
+                        <input type="text" id="to-date" class="p-1 border bg-light form-control" placeholder="To Date">
+                    </div>
+                </div>
+                <div class="row mt-2 d-md-flex justify-content-md-end">
+                    <div class="col col-md-2">
+                        <button class="btn btn-outline-info btn-block form-control">Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="incomes">
             {{#each transactions}}
             <div id="{{_id}}" class="income">
@@ -528,6 +583,7 @@
     <script defer src="./@fortawesome/fontawesome-free/js/brands.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/solid.js"></script>
     <script defer src="./@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+    <link href="./select2/dist/css/select2.min.css" rel="stylesheet" />
 
     <script src="./assets/js/custom.js"></script>
     <script src="transactionManager.js"></script>
