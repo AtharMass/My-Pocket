@@ -4,9 +4,6 @@ const Transaction = require('../models/Transactions')
 const moment = require('moment')
 
 
-
-
-  
 router.post('/transaction', function (request, response) { 
     let data = request.body
     let result ={}
@@ -35,10 +32,20 @@ router.post('/transaction', function (request, response) {
    response.send(result)
 })
 
-router.get('/transactions/expense/:isExpense', function (req, res) {
+router.get('/transactions/:isExpense', function (req, res) {
     let { isExpense } = req.params
     Transaction
         .find({ isExpense })
+        .sort({_id: -1})
+        .exec(function (err, transactions) {
+            res.send(transactions)
+        })
+})
+
+router.get('/transactions/:isExpense', function (req, res) {
+    let { isExpense } = req.params
+    let {isConstant} = req.query
+    Transaction.find({ isExpense ,isConstant })
         .sort({_id: -1})
         .exec(function (err, transactions) {
             res.send(transactions)
@@ -57,22 +64,30 @@ router.delete('/transaction/:id', function (req, res) {
         })
 })
 
-router.put('/transaction/:id', function (request, response) {
+router.put('/transaction/:id',async function (request, response) {
     let data = request.body
     let { id } = request.params
-
-    Transaction.updateOne({ _id: id },
+    let result = {}
+     let updateObj = await Transaction.updateOne({ _id: id },
         {
             $set:
-            [
-                { category : data.category },
-                { date : data.date },
-                { price : data.price },
-                { isExpense : data.isExpense },
-                { isConstant : data.isConstant }
-            ]
+           { 
+                category : data.category,
+                date : data.date ,
+                total : data.total ,
+                title : data.title,
+                isExpense : data.isExpense,
+                isConstant : data.isConstant
+           }
         })   
-        response.send(`Update`)  
+        if(updateObj.ok === 1){
+            result.code = 200
+            result.msg = 'Your Data has been successfuly updated'
+        }else{
+            result.code = 442
+            result.msg = 'Faield to update your data'
+        }
+        response.send(result)  
 })
 
 module.exports = router

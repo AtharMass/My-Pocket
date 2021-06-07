@@ -1,3 +1,5 @@
+
+
 class TransactionManager {
 
     constructor() {
@@ -7,7 +9,7 @@ class TransactionManager {
     getTransactionExpenseFromDB = async function (isExpense) {
         return new Promise(async (resolve, reject) => {
             try {
-                const data = await $.get(`/transactions/expense/${isExpense}`)
+                const data = await $.get(`/transactions/${isExpense}`)
                 data.forEach((el) => {
                     el.date =  moment(el.date).format('YYYY-MM-DD')
                 })
@@ -56,14 +58,34 @@ class TransactionManager {
     }
 
     updateTransaction = async function (id,updateObj) { 
-        return $.ajax({
-            url: `transaction/${id}`,
-            type: 'PUT',
-            data: updateObj,
-            success: function (transaction) {
-                console.log("trans: ",transaction);
+        return new Promise(async (resolve, reject) => {
+            try {
+                const updateActionResp = await $.ajax({
+                    url: `transaction/${id}`,
+                    data : updateObj,
+                    type: 'PUT'
+                });
+                await this.getTransactionExpenseFromDB(updateObj.isExpense)
+                if(updateActionResp.code == 200){
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Nice, ${updateActionResp.msg}`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: `Oops..., Something went wrong!`,
+                        text: `${updateActionResp.msg}`,  
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+                resolve(this.transactionsData)
+            } catch (e) {
+                reject(e)
             }
         });
     }
-
 }
