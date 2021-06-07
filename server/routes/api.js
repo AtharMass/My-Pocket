@@ -42,7 +42,7 @@ router.get('/transactions/:isExpense', function (req, res) {
         })
 })
 
-router.get('/transactions/:isExpense', function (req, res) {
+router.get('/transactions/:isExpense', function (req, res) { //*
     let { isExpense } = req.params
     let {isConstant} = req.query
     Transaction.find({ isExpense ,isConstant })
