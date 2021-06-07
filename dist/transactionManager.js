@@ -66,6 +66,7 @@ class TransactionManager {
                     type: 'PUT'
                 });
                 await this.getTransactionExpenseFromDB(updateObj.isExpense)
+                resolve(this.transactionsData)
                 if(updateActionResp.code == 200){
                     Swal.fire({
                         icon: 'success',
@@ -82,7 +83,6 @@ class TransactionManager {
                         timer: 2000
                     })
                 }
-                resolve(this.transactionsData)
             } catch (e) {
                 reject(e)
             }
