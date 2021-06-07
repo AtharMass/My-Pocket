@@ -94,46 +94,5 @@ class TransactionManager {
             console.log(res);
         })
         return data
-        // , function (req, res) {
-        //     console.log("in search ->  req =  ", req, "   res = ", res)
-
-
-        // })
-        //   return  $.ajax({
-        //         url: `/transactions/a`,
-        //         data: s,
-        //         type: 'GET'
-        //     });
-    
-    //         return new Promise(async (resolve, reject) => {
-    //             try {
-    //                 const updateActionResp = await $.ajax({
-    //                     url: `transactions`,
-    //                     data : searchObj,
-    //                     type: 'GET'
-    //                 });
-    //                 // await this.getTransactionExpenseFromDB(updateObj.isExpense)
-    //                 // resolve(this.transactionsData)
-    //                 // if(updateActionResp.code == 200){
-    //                 //     Swal.fire({
-    //                 //         icon: 'success',
-    //                 //         title: `Nice, ${updateActionResp.msg}`,
-    //                 //         showConfirmButton: false,
-    //                 //         timer: 2000
-    //                 //     })
-    //                 // }else{
-    //                 //     Swal.fire({
-    //                 //         icon: 'error',
-    //                 //         title: `Oops..., Something went wrong!`,
-    //                 //         text: `${updateActionResp.msg}`,  
-    //                 //         showConfirmButton: false,
-    //                 //         timer: 2000
-    //                 //     })
-    //                 // }
-    //             } catch (e) {
-    //                 reject(e)
-    //             }
-    //         });
-    //     }
-}
+    }
 }

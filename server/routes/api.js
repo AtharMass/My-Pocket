@@ -48,8 +48,8 @@ router.get('/filter/transactions', function (req, res) {
  
     // dateOperator : dateOperator,
     // totalOperator : totalOperator
-    
-    if(category && title && firstDate && lastDate && firsTtotal && lastTotal && isConstant){
+    console.log(filterData.category)
+    if(filterData.category && filterData.title && filterData.firstDate && filterData.lastDate && filterData.startfirsTtotal && filterData.lastTotal && filterData.isConstant){
 
     }
 

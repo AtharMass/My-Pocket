@@ -222,30 +222,37 @@ const countExpensesAndIncomes = async () => {
     return myChart
 }
 
- $(document).on('click','#searchTransction',function(){
-    const title = "Drby Bar"
-    const category =  "Resturant"
-    const firstDate = "20-01-2020"
-    const lastDate = "25-01-2020"
-    const firsTtotal = 500
-    const lastTotal = 700
-    const isConstant =  true
-    const dateOperator = "="
-    const totalOperator = ">"
-   
-    let searchObj = {
-        category : category,
-        title : title,
-        firstDate: firstDate,
-        lastDate: lastDate,
-        firsTtotal: firsTtotal,
-        lastTotal: lastTotal,
-        isConstant: isConstant,
-        dateOperator : dateOperator,
-        totalOperator : totalOperator
-    }
+ $(document).on('click','#filterData',function(){
+    let title = $(this).closest(".card").find("#title-filter")
+    title = title.val() || ''
+    let category = $(this).closest(".card").find("#category-filter")
+    category = category.val() || ''
+    console.log("title: ",title)
+    let minTotal = $(this).closest(".card").find("#min-total")
+    minTotal = minTotal.val() || ''
+    let maxTotal = $(this).closest(".card").find("#max-total")
+    maxTotal =  maxTotal.val() || ''
+    let isEqual = $(this).closest(".card").find("#isEqual")
+    isEqual =  isEqual.val() || ''
+    let isConstant = $(this).closest(".card").find("#isConstant-filter")
+    isConstant =  isConstant.val() || ''
+    let fromDate = $(this).closest(".card").find("from-date")
+    fromDate =  fromDate.val() || ''
+    let toDate = $(this).closest(".card").find("to-date")
+    toDate =  toDate.val() || ''
 
    
+    let searchObj = {
+         category : category,
+         title : title,
+         firstDate: fromDate,
+         lastDate: toDate,
+         firsTtotal: minTotal,
+         lastTotal: maxTotal,
+         isConstant: isConstant,
+         isEqual : isEqual
+    }
+    console.log(searchObj)
     transactionManager.searchTransaction(searchObj)
     // render.setTemplate("search")
     // render.renderData(transactionManager.transactionsData)
