@@ -35,7 +35,7 @@ router.get('/transactions/:isExpense', function (req, res) {
     let { isExpense } = req.params
     Transaction
         .find({ isExpense })
-        .sort({ _id: -1 })
+        .sort({ date: -1 })
         .exec(function (err, transactions) {
             res.send(transactions)
         })

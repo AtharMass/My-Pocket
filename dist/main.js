@@ -2,7 +2,7 @@ const render = new Renderer()
 const transactionManager = new TransactionManager()
 
 let idTemplate = "expenses"
-let isExpense = true
+let isExpense = false
 
 const setSelectedItem = function(element){
     $("li").removeClass('selected')
@@ -244,11 +244,13 @@ const countExpensesAndIncomes = async () => {
 
     return myChart
 }
+
 const incomeConstAndIncomeIsConst = async () => {
 
-    const countIncomesConstant = await  transactionManager.getTransactionExpenseConstantFromDB(true,!isExpense)
-    const countIncomesNotConstant = await  transactionManager.getTransactionExpenseConstantFromDB(false,!isExpense)
+    const countIncomesConstant = await  transactionManager.getTransactionExpenseConstantFromDB(true,isExpense)
+    const countIncomesNotConstant = await  transactionManager.getTransactionExpenseConstantFromDB(false,isExpense)
 
+    console.log(!isExpense)
 
     const ctx =  $('#incomeIsConstantChart')
     const myChart = new Chart(ctx, {
@@ -315,8 +317,8 @@ const sumTransactions = async () => {
 
 const expenseCountIsConstant = async () => {
 
-    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true,isExpense)
-    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false, isExpense)
+    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true,!isExpense)
+    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false, !isExpense)
     const ctx =  $('#expensesIsConstantChart')
     const myChart = new Chart(ctx, {
         type: 'pie',
