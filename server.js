@@ -6,7 +6,7 @@ const api = require('./server/routes/api')
 const app = express()
 const PORT = 8080
 
-mongoose.connect("mongodb://localhost/transactions",{ useNewUrlParser: true , useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mypocket",{ useNewUrlParser: true , useUnifiedTopology: true})
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -20,7 +20,7 @@ app.use('/', api)
 Start the server:
 =======================================================*/
 
-app.listen(PORT, function() {
+app.listen(process.env.PORT ||PORT, function() {
     console.log(`Server up and running on port ${PORT}`)
 })
   
