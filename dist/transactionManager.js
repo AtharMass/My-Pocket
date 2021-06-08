@@ -32,6 +32,18 @@ class TransactionManager {
         });
     }
 
+    getSumTransactionFromDB = async function (isExpense) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const data = await $.get(`/sum/${isExpense}`)
+
+                resolve(data.sumExpenses)
+            } catch (e) {
+                reject(e)
+            }
+        });
+    }
+
     saveTransaction = async function (data) {
         await $.post('/transaction', data, function (res) {
             if (res.code === 200) {

@@ -32,6 +32,7 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
         countExpensesAndIncomes()
         expensesConstAndExpensesNotConst()
         incomeConstAndIncomeIsConst()
+        sumTransactions()
         
     }
 })
@@ -175,6 +176,7 @@ $(document).ready(async function(){
     await countExpensesAndIncomes() 
     await expensesConstAndExpensesNotConst()
     await incomeConstAndIncomeIsConst()
+    await sumTransactions()
 })
 
 const countExpensesAndIncomes = async () => {
@@ -187,8 +189,8 @@ const countExpensesAndIncomes = async () => {
         type: 'pie',
         data: {
             labels: [
-                'Expense',
-                'Incomes',
+                `Expense - ${countExpenses.length}`,
+                `Incomes - ${countIncomes.length}`,
               ],            
             datasets: [{
                 label: 'My First Dataset',
@@ -196,8 +198,8 @@ const countExpensesAndIncomes = async () => {
                     countExpenses.length, 
                     countIncomes.length],
                 backgroundColor: [
-                  'rgb(246, 45, 81)',
-                  'rgb(43, 158, 58)'
+                  'pink',
+                  '#61bacf'
                 ],
                 hoverOffset: 4
             }]
@@ -219,8 +221,8 @@ const expensesConstAndExpensesNotConst = async () => {
         type: 'pie',
         data: {
             labels: [
-                'Expense Constant',
-                'Expense Not Constant',
+                `Expense Constant - ${countExpenses}`,
+                `Expense Not Constant - ${countIncomes}`,
               ],            
             datasets: [{
                 label: 'My First Dataset',
@@ -239,6 +241,7 @@ const expensesConstAndExpensesNotConst = async () => {
     return myChart
 }
 
+// ***************** Filter ***************** //
  $(document).on('click','#filterData',async function(){
     let searchObj = {isExpense: isExpense}
     let title = $(this).closest(".card").find("#title-filter")
@@ -267,7 +270,7 @@ const expensesConstAndExpensesNotConst = async () => {
     render.renderData(transactionManager.transactionsData)
 }) 
 
-$(document).on('click','#getAllData',async function(){
+$(document).on('click','#reset',async function(){
   let dd = await transactionManager.getTransactionExpenseFromDB(isExpense)
   render.setTemplate(idTemplate)
   render.renderData(dd)
@@ -284,8 +287,8 @@ const incomeConstAndIncomeIsConst = async () => {
         type: 'pie',
         data: {
             labels: [
-                'Incomes Constant',
-                'Incomes Not Constant',
+                `Incomes Constant - ${countIncomesConstant}`,
+                `Incomes Not Constant - ${countIncomesNotConstant}`,
               ],            
             datasets: [{
                 data: [
@@ -299,6 +302,45 @@ const incomeConstAndIncomeIsConst = async () => {
                 hoverOffset: 4
             }]
         }
+    });
+
+    return myChart
+}
+
+
+const sumTransactions = async () => {
+
+    const sumExpenses = await  transactionManager.getSumTransactionFromDB(isExpense)
+    const sumIncomes = await  transactionManager.getSumTransactionFromDB(!isExpense)
+
+
+    const ctx =  $('#sumCharts')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                `Expense Total- ${sumExpenses}`,
+                `Incomes Total - ${sumIncomes}`,
+              ],            
+            datasets: [{
+                data: [
+                    sumExpenses, 
+                    sumIncomes],
+                backgroundColor: [
+                  'red',
+                  'green'
+                  
+                ],
+                hoverOffset: 4
+            }]
+        },
+        legend: {
+            labels: {
+                fontColor: 'black',
+                fontSize: "15px"
+            }
+        }
+
     });
 
     return myChart

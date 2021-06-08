@@ -155,3 +155,10 @@ canvas{
         box-shadow: #040404 2px 2px 4px;
     }
 }
+
+.date{
+    margin: auto;
+    font-size: 17px;
+    text-align: center;
+    margin-right: 0!important;;
+}

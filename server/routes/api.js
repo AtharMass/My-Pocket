@@ -66,6 +66,32 @@ router.get('/count/:isConstant/:isExpense', function (req, res) {
 
 })
 
+router.get('/sum/:isExpense', function (req, res) {
+    let { isExpense } = req.params
+    let result = {}
+  
+    let sumPromise = Transaction
+        .find(
+            
+            { isExpense: isExpense },
+            {total: 1 , _id:0}
+        )
+    sumPromise.then(function (sum) {
+        let sumExpenses = 0
+        for (const obj of sum) {
+            sumExpenses += obj.total
+        }
+        result.code = 200
+        
+        result.sumExpenses = sumExpenses
+        res.send(result)
+        
+    }).catch(function(err){
+        console.log(err);
+    })
+
+})
+
 router.get('/filter/transactions', function (req, res) {
     let filterData = req.query
     let filters = []
