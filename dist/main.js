@@ -28,8 +28,11 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
     await transactionManager.getTransactionExpenseFromDB(isExpense)
     render.setTemplate(idTemplate)
     render.renderData(transactionManager.transactionsData)
-    if(idTemplate === "dashboard")
+    if(idTemplate === "dashboard"){
         countExpensesAndIncomes()
+        expensesConstAndExpensesNotConst()
+        
+    }
 })
 
 $(document).on('click','#addTransction',async function(){
@@ -168,28 +171,8 @@ $(document).ready(async function(){
     render.setTemplate("dashboard")
     render.renderData([])
 
-    await countExpensesAndIncomes()
-   
-
-    var ctx2 =  $('#myChart2')
-    var myChart2 = new Chart(ctx2, {
-        type: 'pie',
-        data: {
-            labels: [
-                'Constant Expense',
-                'Not Constant Expense',
-              ],            
-            datasets: [{
-                label: 'My First Dataset',
-                data: [300, 50],
-                backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(255, 205, 86)'
-                ],
-                hoverOffset: 4
-            }]
-        }
-    });
+    await countExpensesAndIncomes() 
+    await expensesConstAndExpensesNotConst()
 })
 
 const countExpensesAndIncomes = async () => {
@@ -213,6 +196,38 @@ const countExpensesAndIncomes = async () => {
                 backgroundColor: [
                   'rgb(246, 45, 81)',
                   'rgb(43, 158, 58)'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+    return myChart
+}
+
+
+const expensesConstAndExpensesNotConst = async () => {
+
+    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true)
+    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false)
+
+
+    const ctx =  $('#myChart2')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                'Expense Constant',
+                'Expense Not Constant',
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [
+                    countExpenses, 
+                    countIncomes],
+                backgroundColor: [
+                  '#3dbcbf',
+                  '#a7c101'
                 ],
                 hoverOffset: 4
             }]
@@ -250,4 +265,9 @@ const countExpensesAndIncomes = async () => {
     render.renderData(transactionManager.transactionsData)
 }) 
 
+$(document).on('click','#getAllData',async function(){
+  let dd = await transactionManager.getTransactionExpenseFromDB(isExpense)
+  render.setTemplate(idTemplate)
+  render.renderData(dd)
+})
 

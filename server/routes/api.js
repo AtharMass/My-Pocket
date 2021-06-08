@@ -42,123 +42,56 @@ router.get('/transactions/:isExpense', function (req, res) {
         })
 })
 
+router.get('/count/:isConstant', function (req, res) {
+    let { isConstant } = req.params
+    let result = {}
+    let countPromise = Transaction
+        .find(
+            {
+                $and:
+                    [
+                        { isExpense: true },
+                        { isConstant: isConstant }
+                    ]
+            }
+        )
+        .count()
+    countPromise.then(function (count) {
+        result.code = 200
+        result.count = count
+        res.send(result)
+    }).catch(function(err){
+        console.log(err);
+    })
+
+})
+
 router.get('/filter/transactions', function (req, res) {
     let filterData = req.query
     let filters = []
     let obj = {}
     for (const key in filterData) {
-        if(key === 'minTotal' && filterData[`${key}`] != undefined) {
-            filters = [...filters, { total: {$gt: filterData[`${key}`] }}]
+        if (key === 'minTotal' && filterData[`${key}`] != undefined) {
+            filters = [...filters, { total: { $gt: filterData[`${key}`] } }]
         } else if (key === 'maxTotal' && filterData[`${key}`] != undefined) {
-            filters = [...filters, { total: {$lt: filterData[`${key}`] }}]
-        } else if(key === 'fromDate' && filterData[`${key}`] != undefined) {
-            filters = [...filters, { date: {$gt: filterData[`${key}`] }}]
+            filters = [...filters, { total: { $lt: filterData[`${key}`] } }]
+        } else if (key === 'fromDate' && filterData[`${key}`] != undefined) {
+            filters = [...filters, { date: { $gt: filterData[`${key}`] } }]
         } else if (key === 'toDate' && filterData[`${key}`] != undefined) {
-            filters = [...filters, { date: {$lt: filterData[`${key}`] }}]
-        } else if(filterData[`${key}`] != undefined){
-            obj[`${key}`] =  filterData[`${key}`]
+            filters = [...filters, { date: { $lt: filterData[`${key}`] } }]
+        } else if (filterData[`${key}`] != undefined) {
+            obj[`${key}`] = filterData[`${key}`]
             filters = [...filters, obj]
             obj = {}
         }
-    } 
-
-    console.log(filters)
-
-    Transaction
-    .find(
-        {
-            $and: filters
-        }
-    )
-    .exec(function (err, transactions) {
-        res.send(transactions)
-    })
-
-
-    // dateOperator : dateOperator,
-    // totalOperator : totalOperator
-
-    // if(filterData.category && filterData.title && filterData.firstDate && filterData.lastDate && filterData.startfirsTtotal && filterData.lastTotal && filterData.isConstant){
-
-    // }
-
-    // Transaction.find({ isExpense, isConstant })
-    
-    // let cate = filterData.category
-    // // ---  Search by Category  -----------
-    // if ( cate !== '' ) {
-    //     console.log(cate)
-       
-    //     filters.push({ category: cate })
-    // }
-
-    // let firstNum = filterData.firsTtotal 
-    // let secondNum = filterData.lastTotal
-    // ---  Search by Salary  -----------
-    // if (firstNum !== '' && secondNum !== '') {
-    //     $and : [
-    //         { }
-    //     ]
-    //     let salary = filterData.Salary
-    //     filters.push({ Salary: salary })
-    // }
-
-    // ---  Search by Title  -----------
-    // if (filterData.Title) {
-    //     let title = filterData.Title
-    //     filters.push({ Title: title })
-    // }
-
-    // ---  Search by sepcific Date  -----------
-    // if (filterData.Date) { // search by one day
-    //     let date = filterData.Date
-    //     filters.push({ Date: date })
-    // }
-
-    // ---  Search by   -----------
-    // else {
-    //     if (filterData.firstDate && filterData.lastDate) {
-    //         let start = filterData.firstDate
-    //         let end = filterData.lastDate
-    //         if (start > end) {
-    //             console.log("Sorry can't search it !\nstart date is bigger than the last date");
-    //             res.send("error")
-    //         }
-    //         else {
-    //             filters.push({ Date: { $gte: start } })
-    //             filters.push({ Date: { $lte: end } })
-    //         }
-    //     }
-    // }
-
-    // ---  Search by flag - isConstant  -----------
-    // if (filterData.isConstant) {
-    //     let constt = JSON.parse(filterData.isConstant)
-    //     filters.push({ isConstant: constt })
-    // }
-
-    // ---  Search by flag - isExpense  -----------
-    // if (filterData.isExpense) {
-    //     let exp = JSON.parse(filterData.isExpense)
-    //     filters.push({ isExpense: exp })
-    // }
-
-    //------------ begin to search : 
-    // console.log(filters)
-    // if (filters.length == 1) {
-    //     filterItems = filters[0]
-    //     console.log(filterItems)
-    // }
+    }
 
 
 
-    // `{$and : [
-    //     { date: $gt: { ${fromDate} } },
-    //     { date: $lt: { ${toDate} } },
-    // ]}`
-
-    
-
+    Transaction.find({ $and: filters })
+        .exec(function (err, transactions) {
+            res.send(transactions)
+        })
 })
 
 router.delete('/transaction/:id', function (req, res) {
