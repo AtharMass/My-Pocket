@@ -42,20 +42,20 @@ router.get('/transactions/:isExpense', function (req, res) {
         })
 })
 
-router.get('/count/:isConstant', function (req, res) {
-    let { isConstant } = req.params
+router.get('/count/:isConstant/:isExpense', function (req, res) {
+    let { isConstant,isExpense } = req.params
     let result = {}
     let countPromise = Transaction
         .find(
             {
                 $and:
                     [
-                        { isExpense: true },
+                        { isExpense: isExpense },
                         { isConstant: isConstant }
                     ]
             }
         )
-        .count()
+        .countDocuments()
     countPromise.then(function (count) {
         result.code = 200
         result.count = count

@@ -21,10 +21,10 @@ class TransactionManager {
         });
     }
 
-    getTransactionExpenseConstantFromDB = async function (isConstant) {
+    getTransactionExpenseConstantFromDB = async function (isConstant,isExpense) {
         return new Promise(async (resolve, reject) => {
             try {
-                const data = await $.get(`/count/${isConstant}`)
+                const data = await $.get(`/count/${isConstant}/${isExpense}`)
                 resolve(data.count)
             } catch (e) {
                 reject(e)

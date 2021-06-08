@@ -31,6 +31,7 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
     if(idTemplate === "dashboard"){
         countExpensesAndIncomes()
         expensesConstAndExpensesNotConst()
+        incomeConstAndIncomeIsConst()
         
     }
 })
@@ -173,6 +174,7 @@ $(document).ready(async function(){
 
     await countExpensesAndIncomes() 
     await expensesConstAndExpensesNotConst()
+    await incomeConstAndIncomeIsConst()
 })
 
 const countExpensesAndIncomes = async () => {
@@ -208,8 +210,8 @@ const countExpensesAndIncomes = async () => {
 
 const expensesConstAndExpensesNotConst = async () => {
 
-    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true)
-    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false)
+    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true,isExpense)
+    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false, isExpense)
 
 
     const ctx =  $('#myChart2')
@@ -271,3 +273,33 @@ $(document).on('click','#getAllData',async function(){
   render.renderData(dd)
 })
 
+const incomeConstAndIncomeIsConst = async () => {
+
+    const countIncomesConstant = await  transactionManager.getTransactionExpenseConstantFromDB(true,!isExpense)
+    const countIncomesNotConstant = await  transactionManager.getTransactionExpenseConstantFromDB(false,!isExpense)
+
+
+    const ctx =  $('#incomeConstant')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                'Incomes Constant',
+                'Incomes Not Constant',
+              ],            
+            datasets: [{
+                data: [
+                    countIncomesConstant, 
+                    countIncomesNotConstant],
+                backgroundColor: [
+                  '#faa80d',
+                  '#01a6cf'
+                  
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+    return myChart
+}
