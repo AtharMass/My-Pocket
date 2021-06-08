@@ -179,11 +179,66 @@ $(document).ready(async function(){
     await sumTransactions()
 })
 
+const countExpensesAndIncomes = async () => {
+
+    const countExpenses = await  transactionManager.getTransactionExpenseFromDB(true)
+    const countIncomes = await  transactionManager.getTransactionExpenseFromDB(false)
+
+    const ctx =  $('#expensesIncomesChart')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                `Expense - ${countExpenses.length}`,
+                `Incomes - ${countIncomes.length}`,
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [
+                    countExpenses.length, 
+                    countIncomes.length],
+                backgroundColor: [
+                  'pink',
+                  '#61bacf'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+    return myChart
+}
+
+const expensesConstAndExpensesNotConst = async () => {
 
 
 
+    const ctx =  $('#expensesIsConstantChart')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                `Expense Constant - ${countExpenses}`,
+                `Expense Not Constant - ${countIncomes}`,
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [
+                    countExpenses, 
+                    countIncomes],
+                backgroundColor: [
+                  '#3dbcbf',
+                  '#a7c101'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
 
+    return myChart
+}
 
+// ***************** Filter ***************** //
  $(document).on('click','#filterData',async function(){
     let searchObj = {isExpense: isExpense}
     let title = $(this).closest(".card").find("#title-filter")
@@ -225,7 +280,7 @@ const incomeConstAndIncomeIsConst = async () => {
     const countIncomesNotConstant = await  transactionManager.getTransactionExpenseConstantFromDB(false,!isExpense)
 
 
-    const ctx =  $('#incomeConstant')
+    const ctx =  $('#incomeIsConstantChart')
     const myChart = new Chart(ctx, {
         type: 'pie',
         data: {
