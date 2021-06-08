@@ -184,7 +184,7 @@ const countExpensesAndIncomes = async () => {
     const countExpenses = await  transactionManager.getTransactionExpenseFromDB(true)
     const countIncomes = await  transactionManager.getTransactionExpenseFromDB(false)
 
-    const ctx =  $('#myChart')
+    const ctx =  $('#expensesIncomesChart')
     const myChart = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -209,14 +209,13 @@ const countExpensesAndIncomes = async () => {
     return myChart
 }
 
-
 const expensesConstAndExpensesNotConst = async () => {
 
     const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true,isExpense)
     const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false, isExpense)
 
 
-    const ctx =  $('#myChart2')
+    const ctx =  $('#expensesIsConstantChart')
     const myChart = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -282,7 +281,7 @@ const incomeConstAndIncomeIsConst = async () => {
     const countIncomesNotConstant = await  transactionManager.getTransactionExpenseConstantFromDB(false,!isExpense)
 
 
-    const ctx =  $('#incomeConstant')
+    const ctx =  $('#incomeIsConstantChart')
     const myChart = new Chart(ctx, {
         type: 'pie',
         data: {
