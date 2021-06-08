@@ -1,7 +1,7 @@
 # My-Pocket
 ֳֳֳֳ
 **A Financial Management Platform**
-------------------------------------
+___________________________________
 WEB Application
 **Technologies:**
 1) HTML5
