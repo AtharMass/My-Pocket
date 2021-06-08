@@ -30,7 +30,7 @@ $('#sidebarnav').on('click',".sidebar-item", async function(){
     render.renderData(transactionManager.transactionsData)
     if(idTemplate === "dashboard"){
         countExpensesAndIncomes()
-        expensesConstAndExpensesNotConst()
+        expenseCountIsConstant()
         incomeConstAndIncomeIsConst()
         sumTransactions()
         
@@ -174,74 +174,16 @@ $(document).ready(async function(){
     render.renderData([])
 
     await countExpensesAndIncomes() 
-    await expensesConstAndExpensesNotConst()
+    await expenseCountIsConstant()
     await incomeConstAndIncomeIsConst()
     await sumTransactions()
 })
 
-const countExpensesAndIncomes = async () => {
-
-    const countExpenses = await  transactionManager.getTransactionExpenseFromDB(true)
-    const countIncomes = await  transactionManager.getTransactionExpenseFromDB(false)
-
-    const ctx =  $('#myChart')
-    const myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: [
-                `Expense - ${countExpenses.length}`,
-                `Incomes - ${countIncomes.length}`,
-              ],            
-            datasets: [{
-                label: 'My First Dataset',
-                data: [
-                    countExpenses.length, 
-                    countIncomes.length],
-                backgroundColor: [
-                  'pink',
-                  '#61bacf'
-                ],
-                hoverOffset: 4
-            }]
-        }
-    });
-
-    return myChart
-}
 
 
-const expensesConstAndExpensesNotConst = async () => {
-
-    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true,isExpense)
-    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false, isExpense)
 
 
-    const ctx =  $('#myChart2')
-    const myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: [
-                `Expense Constant - ${countExpenses}`,
-                `Expense Not Constant - ${countIncomes}`,
-              ],            
-            datasets: [{
-                label: 'My First Dataset',
-                data: [
-                    countExpenses, 
-                    countIncomes],
-                backgroundColor: [
-                  '#3dbcbf',
-                  '#a7c101'
-                ],
-                hoverOffset: 4
-            }]
-        }
-    });
 
-    return myChart
-}
-
-// ***************** Filter ***************** //
  $(document).on('click','#filterData',async function(){
     let searchObj = {isExpense: isExpense}
     let title = $(this).closest(".card").find("#title-filter")
@@ -269,6 +211,7 @@ const expensesConstAndExpensesNotConst = async () => {
     render.setTemplate(idTemplate)
     render.renderData(transactionManager.transactionsData)
 }) 
+
 
 $(document).on('click','#reset',async function(){
   let dd = await transactionManager.getTransactionExpenseFromDB(isExpense)
@@ -307,7 +250,6 @@ const incomeConstAndIncomeIsConst = async () => {
     return myChart
 }
 
-
 const sumTransactions = async () => {
 
     const sumExpenses = await  transactionManager.getSumTransactionFromDB(isExpense)
@@ -341,6 +283,65 @@ const sumTransactions = async () => {
             }
         }
 
+    });
+
+    return myChart
+}
+
+const expenseCountIsConstant = async () => {
+
+    const countExpenses = await  transactionManager.getTransactionExpenseConstantFromDB(true,isExpense)
+    const countIncomes = await  transactionManager.getTransactionExpenseConstantFromDB(false, isExpense)
+    const ctx =  $('#myChart2')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                `Expense Constant - ${countExpenses}`,
+                `Expense Not Constant - ${countIncomes}`,
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [
+                    countExpenses, 
+                    countIncomes],
+                backgroundColor: [
+                  '#3dbcbf',
+                  '#a7c101'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+    return myChart
+}
+
+const countExpensesAndIncomes = async () => {
+
+    const countExpenses = await  transactionManager.getTransactionExpenseFromDB(true)
+    const countIncomes = await  transactionManager.getTransactionExpenseFromDB(false)
+
+    const ctx =  $('#myChart')
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                `Expense - ${countExpenses.length}`,
+                `Incomes - ${countIncomes.length}`,
+              ],            
+            datasets: [{
+                label: 'My First Dataset',
+                data: [
+                    countExpenses.length, 
+                    countIncomes.length],
+                backgroundColor: [
+                  'pink',
+                  '#61bacf'
+                ],
+                hoverOffset: 4
+            }]
+        }
     });
 
     return myChart

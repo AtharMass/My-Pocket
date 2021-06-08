@@ -3,7 +3,6 @@ const router = express.Router()
 const Transaction = require('../models/Transactions')
 const moment = require('moment')
 
-
 router.post('/transaction', function (request, response) {
     let data = request.body
     let result = {}
@@ -111,9 +110,6 @@ router.get('/filter/transactions', function (req, res) {
             obj = {}
         }
     }
-
-
-
     Transaction.find({ $and: filters })
         .exec(function (err, transactions) {
             res.send(transactions)

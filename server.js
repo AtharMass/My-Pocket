@@ -1,10 +1,10 @@
 const path = require('path')
-var express = require('express')
-var mongoose = require('mongoose')
+const express = require('express')
+const mongoose = require('mongoose')
 const api = require('./server/routes/api')
 
-var app = express()
-const PORT = 3555
+const app = express()
+const PORT = 8080
 
 mongoose.connect("mongodb://localhost/transactions",{ useNewUrlParser: true , useUnifiedTopology: true})
 

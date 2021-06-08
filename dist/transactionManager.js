@@ -36,7 +36,6 @@ class TransactionManager {
         return new Promise(async (resolve, reject) => {
             try {
                 const data = await $.get(`/sum/${isExpense}`)
-
                 resolve(data.sumExpenses)
             } catch (e) {
                 reject(e)
