@@ -1,2 +1,2 @@
 # My-Pocket
-ֳֳֳֳֳֳ##A Financial Management Platform
+ֳֳֳֳ#A Financial Management Platform
