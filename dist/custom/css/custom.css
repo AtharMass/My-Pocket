@@ -52,6 +52,7 @@
     display: grid;
     grid-area: t;
     margin: auto;
+    text-align: center;
 }
 .transaction-category{
     display: grid;
@@ -72,7 +73,6 @@
 .transaction-action{
     display: flex;
     grid-area: a;
-    margin: auto;
 }
 
 .incomes{
@@ -100,6 +100,9 @@
     box-shadow: #040404 2px 2px 4px;
 }
 
+input{
+    margin-top: 5px
+}
 .nav-toggler{
     color: white !important;
     font-size: 20px
@@ -111,8 +114,44 @@ canvas{
     margin: auto;
 }
 
-.filter{
-    margin: 5px;
-    width: 100%;
-    border-radius: 5px;
+
+@media (max-width:650px) {
+    .expense{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas:
+        'i '
+        't '
+        'c '
+        'to '
+        'd '
+        'a ';
+        margin: auto;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 17px;
+        background: transparent;
+        border-radius: 2px;
+        box-shadow: #040404 2px 2px 4px;
+    }
+    .income{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas:
+        'i '
+        't '
+        'c '
+        'to '
+        'd '
+        'a ';
+        margin: auto;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 17px;
+        background: transparent;
+        border-radius: 2px;
+        box-shadow: #040404 2px 2px 4px;
+    }
 }

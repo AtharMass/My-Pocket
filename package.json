@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
+    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.1",
